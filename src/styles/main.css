@@ -1,0 +1,221 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  background-color: #f9f9f9;
+}
+
+.navbar {
+  background: linear-gradient(to right, #7b2ff7, #f107a3);
+  padding: 15px 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+
+.navbar h3 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+.navbar h3 span {
+  margin-left: 10px;
+}
+
+.navbar .nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.navbar a:hover {
+  opacity: 0.8;
+}
+
+
+.navbar button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  margin-left: 15px;
+}
+
+.page {
+  padding: 20px;
+}
+
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to right, #7b2ff7, #f107a3);
+}
+
+.login-card {
+  background: white;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-card h2 {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.login-card input {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.login-card button {
+  background-color: #7b2ff7;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-card button:hover {
+  background-color: #651df6;
+}
+
+.error-text {
+  color: red;
+  margin-top: 10px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.success-text {
+  color: green;
+  margin-top: 10px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.register-text {
+  margin-top: 15px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.register-text a {
+  color: #7b2ff7;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-text a:hover {
+  text-decoration: underline;
+}
+
+.password-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 40px; /* ruang untuk icon */
+}
+
+.toggle-password {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: transparent;   /* ✅ Hilangkan warna latar */
+  border: none;              /* ✅ Hilangkan border */
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.material-icons {
+  font-size: 22px;
+  /* color: #7b2ff7;  */
+}
+
+.home-container {
+  padding: 60px 30px;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.home-container h1 {
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.home-container p {
+  font-size: 18px;
+  color: #555;
+}
+
+.events-container {
+  padding: 40px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.events-container h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+.events-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.event-card {
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease-in-out;
+}
+
+.event-card:hover {
+  transform: translateY(-4px);
+}
+
+.event-card h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
+  color: #7b2ff7;
+}
+
+.event-card p {
+  margin: 5px 0;
+  color: #444;
+  font-size: 14px;
+}
