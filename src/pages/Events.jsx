@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const Events = () => {
   const [events, setEvents] = useState([]);
@@ -32,6 +33,10 @@ const Events = () => {
             <p><strong>📍 Location:</strong> {event.location || "-"}</p>
             <p><strong>📅 Date:</strong> {new Date(event.date).toLocaleDateString()}</p>
             <p><strong>🎟️ Stock:</strong> {event.stock}</p>
+
+            <Link to={`/events/${event.id}`}>
+              <button className="book-btn">Booking Now</button>
+            </Link>
           </div>
         ))}
       </div>

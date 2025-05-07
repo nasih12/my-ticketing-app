@@ -6,6 +6,8 @@ import MyTicket from './pages/MyTicket';
 import Navbar from './components/Navbar';
 import PrivateRoute from './components/PrivateRoute';
 import Register from './pages/Register';
+import EventDetail from './pages/EventDetail';
+import MyTickets from './pages/MyTicket';
 
 function AppContent() {
   const location = useLocation();
@@ -22,6 +24,9 @@ function AppContent() {
         <Route path="/myticket" element={<PrivateRoute><MyTicket /></PrivateRoute>} />
         <Route path="/register" element={<Register />} />
         <Route path="/events" element={<PrivateRoute><Events /></PrivateRoute>} />
+        <Route path="/events/:id" element={<PrivateRoute><EventDetail /></PrivateRoute>} />
+        <Route path="/mytickets" element={<PrivateRoute><MyTickets /></PrivateRoute>} />
+
       </Routes>
     </>
   );
