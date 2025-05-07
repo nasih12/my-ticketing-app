@@ -37,7 +37,7 @@ const Login = () => {
   return (
     <div className="login-wrapper">
       <form onSubmit={handleSubmit} className="login-card">
-        <p2>Okarin's Ticket Hub</p2>
+        <h3>Okarin's Ticket Hub</h3>
         <h2>Welcome Back</h2>
         <input
           type="text"
