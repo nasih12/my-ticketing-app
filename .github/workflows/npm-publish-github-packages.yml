@@ -44,7 +44,7 @@ jobs:
             ${{ env.IMAGE_NAME }}:latest
             ${{ env.IMAGE_NAME }}:${{ env.SHORT_SHA }}
           build-args: |
-            VITE_API_BASE_URL=${{ secrets.DB_HOST }}
+            VITE_API_BASE_URL=${{ secrets.URL }}
 
   deploy:
     name: Apps Deployment
