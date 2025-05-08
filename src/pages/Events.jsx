@@ -1,13 +1,18 @@
 import { useEffect, useState } from "react";
 import EventCard from "../components/EventCard";
 
+import { Link } from "react-router-dom";
+
 const Events = () => {
   const [events, setEvents] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
 
-  const filteredEvents = events.filter(event =>
-    event.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+
+  
+  const filteredEvents = Array.isArray(events)
+  ? events.filter(event => event && event.title?.toLowerCase().includes(searchTerm.toLowerCase()))
+  : [];
+
 
   const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Yakin ingin menghapus event ini?");
@@ -47,18 +52,37 @@ const Events = () => {
         body: JSON.stringify({ ...event, title: newTitle }),
       });
 
-      if (res.ok) {
-        const updated = await res.json();
-        setEvents(prev =>
-          prev.map(e => e.id === event.id ? updated.data : e)
-        );
-        alert("Event berhasil diupdate.");
-      } else {
-        alert("Gagal update event.");
-      }
+    
+      console.log("Response status:", res.status);
+      // console.log("Response body:", await res.json());
+      console.log("Response headers:", res.headers.get("Content-Type"));
+      console.log("Response URL:", res.url);
+      console.log("Response status text:", res.statusText);
+
+    //  /\ const response = await res.json();
+
+    if (!res.ok) {
+      alert("Gagal update event.");
+      return;
+    }
+
+    const updatedRes = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/events/${event.id}`, {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+
+    const updatedData = await updatedRes.json();
+
+    setEvents(prev =>
+      prev.map(e => e.id === event.id ? updatedData.data : e)
+    );
+
+    setActiveDropdown(null);
+    alert("Event berhasil diupdate.");
     } catch (err) {
       console.error(err);
-      alert("Terjadi kesalahan.");
+      alert("Terjadi kesalahan.", err);
     }
   };
 
@@ -70,10 +94,11 @@ const Events = () => {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
+
         const json = await res.json();
         setEvents(json.data || []);
       } catch (err) {
-        console.error("Failed to fetch events:", err);
+        console.error("Gagal mengambil data events:", err);
       }
     };
 
@@ -82,7 +107,9 @@ const Events = () => {
 
   return (
     <div className="events-container">
-      <h2 style={{display: "flex", justifyContent: "left"}}>Upcoming Events</h2>
+      <div className="events-header">
+        <h2 style={{display: "flex", justifyContent: "left"}}>Upcoming Events</h2>
+        <Link to="/events/create" className="btn-create">+ Create Event</Link></div>
       <div style={{ display: "flex", gap: "8px", marginBottom: "20px" }}>
         <input
           type="text"
@@ -91,7 +118,6 @@ const Events = () => {
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        {/* <button className="btn-search">Search</button> */}
       </div>
 
       <div className="events-grid">
@@ -102,7 +128,9 @@ const Events = () => {
             onEdit={handleEdit}
             onDelete={handleDelete}
           />
-        ))}
+        ))} 
+        
+        {filteredEvents.length === 0 && <h2>Tidak ada event</h2>}
       </div>
     </div>
   );

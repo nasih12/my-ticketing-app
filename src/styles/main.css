@@ -440,3 +440,23 @@ body {
   cursor: pointer;
 }
 
+.events-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.btn-create {
+  padding: 10px 16px;
+  background-color: #4a63f0;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btn-create:hover {
+  background-color: #3a4ee0;
+}

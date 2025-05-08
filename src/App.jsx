@@ -8,6 +8,8 @@ import PrivateRoute from './components/PrivateRoute';
 import Register from './pages/Register';
 import EventDetail from './pages/EventDetail';
 import MyTickets from './pages/MyTicket';
+import CreateEvent from './pages/CreateEvent';
+
 
 function AppContent() {
   const location = useLocation();
@@ -26,6 +28,8 @@ function AppContent() {
         <Route path="/events" element={<PrivateRoute><Events /></PrivateRoute>} />
         <Route path="/events/:id" element={<PrivateRoute><EventDetail /></PrivateRoute>} />
         <Route path="/mytickets" element={<PrivateRoute><MyTickets /></PrivateRoute>} />
+        <Route path="/events/create" element={<CreateEvent />} />
+
 
       </Routes>
     </>

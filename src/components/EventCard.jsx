@@ -6,6 +6,19 @@ const EventCard = ({ event, onEdit, onDelete }) => {
 
   const toggleDropdown = () => setShowDropdown(!showDropdown);
 
+  
+  const handleClickEdit = () => {
+    setShowDropdown(false);
+    onEdit(event);
+  };
+
+  const handleClickOutside = (e) => {
+    if (showDropdown && !e.target.closest('.dropdown')) {
+      setShowDropdown(false);
+    }
+  };
+  document.addEventListener('click', handleClickOutside);
+
   return (
     <div className="event-card">
       <div className="card-header">
@@ -14,7 +27,7 @@ const EventCard = ({ event, onEdit, onDelete }) => {
           <button className="menu-button" onClick={toggleDropdown}>⋮</button>
           {showDropdown && (
             <div className="dropdown-menu">
-              <button onClick={() => onEdit(event)}>Edit</button>
+              <button onClick={() => handleClickEdit()}>Edit</button>
               <button onClick={() => onDelete(event.id)}>Delete</button>
             </div>
           )}
