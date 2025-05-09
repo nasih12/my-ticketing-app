@@ -460,3 +460,10 @@ body {
 .btn-create:hover {
   background-color: #3a4ee0;
 }
+
+.pagination {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 24px;
+}

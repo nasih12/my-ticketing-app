@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 const Events = () => {
   const [events, setEvents] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-
-
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
   
   const filteredEvents = Array.isArray(events)
   ? events.filter(event => event && event.title?.toLowerCase().includes(searchTerm.toLowerCase()))
@@ -53,13 +53,6 @@ const Events = () => {
       });
 
     
-      console.log("Response status:", res.status);
-      // console.log("Response body:", await res.json());
-      console.log("Response headers:", res.headers.get("Content-Type"));
-      console.log("Response URL:", res.url);
-      console.log("Response status text:", res.statusText);
-
-    //  /\ const response = await res.json();
 
     if (!res.ok) {
       alert("Gagal update event.");
@@ -89,21 +82,23 @@ const Events = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/events?page=1&size=10`, {
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/events?page=${page}&size=6`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
-
+  
         const json = await res.json();
         setEvents(json.data || []);
+        setTotalPages(Math.ceil(json.total / 6));
       } catch (err) {
-        console.error("Gagal mengambil data events:", err);
+        console.error("Failed to fetch events:", err);
       }
-    };
-
+    };    
+  
     fetchEvents();
-  }, []);
+  }, [page]);
+  
 
   return (
     <div className="events-container">
@@ -132,6 +127,16 @@ const Events = () => {
         
         {filteredEvents.length === 0 && <h2>Tidak ada event</h2>}
       </div>
+      <div className="pagination">
+        <button className="btn-create" disabled={page === 1} onClick={() => setPage(prev => prev - 1)}>
+          Previous
+        </button>
+        <span>Page {page} of {totalPages}</span>
+        <button className="btn-create" disabled={page === totalPages} onClick={() => setPage(prev => prev + 1)}>
+          Next
+        </button>
+      </div>
+
     </div>
   );
 };
