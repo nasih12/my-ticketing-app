@@ -82,7 +82,13 @@ const Events = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/events?page=${page}&size=6`, {
+        const query = new URLSearchParams({
+          page,
+          size: 6,
+          q: searchTerm.trim()
+        });
+
+        const res = await fetch(`${import.meta.env.VITE_API_BASE_URL}/api/events?${query.toString()}`, {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
@@ -91,6 +97,7 @@ const Events = () => {
         const json = await res.json();
         setEvents(json.data || []);
         setTotalPages(Math.ceil(json.total / 6));
+        
       } catch (err) {
         console.error("Failed to fetch events:", err);
       }
@@ -111,7 +118,10 @@ const Events = () => {
           placeholder="Cari event..."
           className="search-input"
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={function (e) {
+            setSearchTerm(e.target.value);
+            setPage(1); 
+          }}
         />
       </div>
 
